@@ -190,6 +190,10 @@ Counterpart.prototype.translate = function(key, options) {
     throw new Error('invalid argument: key');
   }
 
+  if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+    return key;
+  }
+
   if (isSymbol(key)) {
     key = key.substr(1);
   }
@@ -206,6 +210,10 @@ Counterpart.prototype.translate = function(key, options) {
 
   var separator = options.separator || this._registry.separator;
   delete options.separator;
+
+  if (separator === '__proto__' || separator === 'constructor' || separator === 'prototype') {
+    separator = '.';
+  }
 
   var fallbackLocales = [].concat(options.fallbackLocale || this._registry.fallbackLocales);
   delete options.fallbackLocale;
@@ -329,6 +337,10 @@ Counterpart.prototype._normalizeKey = function(key, separator) {
       var keys = key.split(separator);
 
       for (var i = keys.length - 1; i >= 0; i--) {
+        if (keys[i] === '__proto__' || keys[i] === 'constructor' || keys[i] === 'prototype') {
+          keys.splice(i, 1);
+          continue;
+        }
         if (keys[i] === '') {
           keys.splice(i, 1);
 
