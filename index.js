@@ -55,7 +55,7 @@ function Counterpart() {
     scope: null,
     translations: {},
     interpolations: {},
-    normalizedKeys: {},
+    normalizedKeys: Object.create(null),
     separator: '.',
     keepTrailingDot: false,
     keyTransformer: function(key) { return key; },
@@ -314,7 +314,7 @@ Counterpart.prototype._normalizeKeys = function(locale, scope, key, separator) {
 };
 
 Counterpart.prototype._normalizeKey = function(key, separator) {
-  this._registry.normalizedKeys[separator] = this._registry.normalizedKeys[separator] || {};
+  this._registry.normalizedKeys[separator] = this._registry.normalizedKeys[separator] || Object.create(null);
 
   this._registry.normalizedKeys[separator][key] = this._registry.normalizedKeys[separator][key] || (function(key) {
     if (isArray(key)) {
