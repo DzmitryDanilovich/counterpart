@@ -1,5 +1,7 @@
 # Counterpart
 
+> **Note:** This is a fork of [counterpart](https://github.com/martinandert/counterpart) maintained by @DzmitryDanilovich.
+
 A translation and localization library for Node.js and the browser. The project is inspired by Ruby's famous [I18n gem](https://github.com/svenfuchs/i18n).
 
 Features:
@@ -14,7 +16,7 @@ Features:
 Install via npm:
 
 ```bash
-% npm install counterpart
+% npm install @dd221x0/counterpart
 ```
 
 

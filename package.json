@@ -1,11 +1,11 @@
 {
-  "name": "counterpart",
-  "version": "0.18.6",
+  "name": "@dd221x0/counterpart",
+  "version": "0.18.7",
   "description": "A translation and localization library for Node.js and the browser",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/martinandert/counterpart.git"
+    "url": "https://github.com/DzmitryDanilovich/counterpart.git"
   },
   "keywords": [
     "globalization",
@@ -34,9 +34,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/martinandert/counterpart/issues"
+    "url": "https://github.com/DzmitryDanilovich/counterpart/issues"
   },
-  "homepage": "https://github.com/martinandert/counterpart",
+  "homepage": "https://github.com/DzmitryDanilovich/counterpart",
   "dependencies": {
     "date-names": "^0.1.11",
     "except": "^0.1.3",
