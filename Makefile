@@ -1,7 +1,7 @@
 BIN = ./node_modules/.bin
 
 test: lint
-	@$(BIN)/mocha -t 5000 -b -R spec spec.js
+	@$(BIN)/mocha -t 5000 -b -R spec spec.js precision.spec.js
 
 lint: node_modules/
 	@$(BIN)/jshint index.js strftime.js locales/

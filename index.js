@@ -10,6 +10,21 @@ var except  = require('except');
 var strftime = require('./strftime');
 
 var translationScope = 'counterpart';
+// Named keys cannot contain percent signs. Excluding them prevents malformed
+// placeholders from repeatedly scanning overlapping suffixes.
+var interpolationPlaceholder = /%%|(%(?:[1-9]\d*\$|\([^)%]+\))?\+?(?:0|'[^$])?-?\d*)(?:\.(\d+))?([b-gijostTuvxX])/g;
+
+function boundNumericPrecision(entry) {
+  return entry.replace(interpolationPlaceholder, function(placeholder, prefix, precision, type) {
+    if (precision === undefined || !/[efg]/.test(type)) {
+      return placeholder;
+    }
+
+    var minimum = type === 'g' ? 1 : 0;
+    var bounded = Math.max(minimum, Math.min(100, Number(precision)));
+    return bounded === Number(precision) ? placeholder : prefix + '.' + bounded + type;
+  });
+}
 
 function isString(val) {
   return typeof val === 'string' || Object.prototype.toString.call(val) === '[object String]';
@@ -351,7 +366,7 @@ Counterpart.prototype._interpolate = function(entry, values) {
   }
 
   try {
-    return sprintf(entry, extend({}, this._registry.interpolations, values));
+    return sprintf(boundNumericPrecision(entry), extend({}, this._registry.interpolations, values));
   } catch (err) {
     if (this.listenerCount('error') > 0) {
       this.emit('error', err, entry, values);

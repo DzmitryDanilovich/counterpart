@@ -102,6 +102,8 @@ Translations can contain interpolation variables which will be replaced by value
 translate('foo', { bar: 'baz' }) // => 'foo baz'
 ```
 
+Numeric interpolation precision is capped at 100 digits for `%e`, `%f`, and `%g` conversions. A zero precision for `%g` uses one significant digit. These bounds prevent numeric formatting errors when a translation requests unsupported precision. String precision and escaped percent signs keep their existing behavior.
+
 ### Pluralization
 
 Translation data can contain pluralized translations. Pluralized translations are provided as a sub-object to the translation key containing the keys `one`, `other` and optionally `zero`:
